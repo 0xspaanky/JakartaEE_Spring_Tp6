@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome · User Manager</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+
+    <section class="hero">
+        <div class="hero__badge">👋</div>
+        <h1 class="hero__title">Welcome to <span>User Manager</span></h1>
+        <p class="hero__subtitle">
+            A simple, modern way to keep your directory of people organised.
+            Add, edit and remove users in just a few clicks.
+        </p>
+
+        <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" th:href="@{/users}">
+                View users
+                <span class="count-pill" th:if="${userCount != null}" th:text="${userCount}">0</span>
+            </a>
+            <a class="btn btn--ghost btn--lg" th:href="@{/signup}">＋ Add a user</a>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature">
+                <div class="feature__icon">⚡</div>
+                <h3>Fast &amp; simple</h3>
+                <p>Create and manage users with a clean, distraction-free interface.</p>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">✅</div>
+                <h3>Validated input</h3>
+                <p>Name and email are checked so your data stays clean.</p>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">💾</div>
+                <h3>Persistent</h3>
+                <p>Everything is stored safely in a MySQL database.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

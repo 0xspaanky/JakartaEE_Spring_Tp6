@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users · User Manager</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+
+    <a class="back-link" th:href="@{/}">← Home</a>
+
+    <header class="app-header">
+        <div>
+            <h1 class="app-header__title">
+                <span class="app-header__badge">👥</span>
+                User Manager
+            </h1>
+            <p class="app-header__subtitle">Create, edit and remove the people in your directory.</p>
+        </div>
+        <a class="btn btn--primary" th:href="@{/signup}">＋ Add user</a>
+    </header>
+
+    <!-- Empty state -->
+    <div class="card" th:if="${users == null or #lists.isEmpty(users)}">
+        <div class="empty">
+            <div class="empty__icon">🗂️</div>
+            <h2>No users yet</h2>
+            <p>Get started by adding your first user to the directory.</p>
+            <a class="btn btn--primary" th:href="@{/signup}">＋ Add your first user</a>
+        </div>
+    </div>
+
+    <!-- User list -->
+    <div class="card" th:unless="${users == null or #lists.isEmpty(users)}">
+        <div class="card__header">
+            <h2>
+                Users
+                <span class="count-pill" th:text="${#lists.size(users)}">0</span>
+            </h2>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th style="text-align:right;">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td>
+                        <div class="cell-name">
+                            <span class="avatar"
+                                  th:text="${#strings.isEmpty(user.name) ? '?' : #strings.toUpperCase(#strings.substring(user.name,0,1))}">A</span>
+                            <span th:text="${user.name}">Name</span>
+                        </div>
+                    </td>
+                    <td class="cell-email" th:text="${user.email}">email@example.com</td>
+                    <td>
+                        <div class="actions">
+                            <a class="btn btn--ghost btn--sm" th:href="@{/edit/{id}(id=${user.id})}">Edit</a>
+                            <a class="btn btn--danger btn--sm"
+                               th:href="@{/delete/{id}(id=${user.id})}"
+                               onclick="return confirm('Delete this user?');">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

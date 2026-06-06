@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit user · User Manager</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container container--narrow">
+
+    <a class="back-link" th:href="@{/users}">← Back to users</a>
+
+    <header class="app-header">
+        <div>
+            <h1 class="app-header__title">
+                <span class="app-header__badge">✎</span>
+                Edit user
+            </h1>
+            <p class="app-header__subtitle">Update the details for this user.</p>
+        </div>
+    </header>
+
+    <div class="card">
+        <div class="card__body">
+            <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post" novalidate>
+
+                <div class="field">
+                    <label class="field__label" for="name">Name</label>
+                    <input type="text" id="name" placeholder="Jane Doe"
+                           class="field__input"
+                           th:classappend="${#fields.hasErrors('name')} ? 'field__input--error'"
+                           th:field="*{name}">
+                    <span class="field__error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </div>
+
+                <div class="field">
+                    <label class="field__label" for="email">Email</label>
+                    <input type="email" id="email" placeholder="jane@example.com"
+                           class="field__input"
+                           th:classappend="${#fields.hasErrors('email')} ? 'field__input--error'"
+                           th:field="*{email}">
+                    <span class="field__error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn--primary btn--block">Save changes</button>
+                    <a class="btn btn--ghost" th:href="@{/users}">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
